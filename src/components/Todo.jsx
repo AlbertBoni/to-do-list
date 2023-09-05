@@ -1,6 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-const Todo = ({todo}) => {
+import './Todo.css';
+
+const Todo = ({todo, removeTodo}) => {
+  console.log("todo: ", todo);
   return (
     <div className='todo-item'>
         <div className='todo-content'>
@@ -8,11 +11,11 @@ const Todo = ({todo}) => {
             <p className='todo-category'>({todo.category})</p>
         </div>
         <div>
-            <button className='todo-item-complete'>Completar</button>
-            <button className='todo-item-remove'>X</button>
+            <button className='todo-button-complete'>Completar</button>
+            <button className='todo-button-remove' onClick={() => removeTodo(todo.id)}>X</button>
         </div>
     </div>
   )
 }
 
-export default Todo
+export default Todo;
