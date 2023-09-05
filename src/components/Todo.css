@@ -1,7 +1,7 @@
 .todo-list {
     margin-bottom: 20px;
     padding-bottom: 20px;
-    margin-bottom: 1px solid #555555;
+    border-bottom: 1px solid #555555;
 }
 
 .todo-item {

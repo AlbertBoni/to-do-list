@@ -6,11 +6,12 @@ body {
   background-image: url('./img/backgroud.jpg');
   background-position: center;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .app {
   max-width: 600px;
-  margin: 0 auto 300px;
+  margin: 0 auto;
   background-color: #efefef;
   padding: 20px 30px;
   border-radius: 10px;
