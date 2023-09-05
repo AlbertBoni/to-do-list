@@ -5,24 +5,25 @@ import "./App.css";
 import Todo from './components/Todo';
 import TodoForm from './components/TodoForm';
 import Search from './components/Search';
+import Filter from './components/Filter';
 
 
 function App() {
   const [todos, setTodos] = useState([
     {
-      id:1,
+      id: 1,
       text: "criar funcionalidade x no sistema",
       category: "Trabalho",
       isCompleted: false,
     },
     {
-      id:2,
+      id: 2,
       text: "Ir pra academia",
       category: "Pessoal",
       isCompleted: false,
     },
     {
-      id:3,
+      id: 3,
       text: "Estudar React",
       category: "Estudos",
       isCompleted: false,
@@ -30,6 +31,10 @@ function App() {
   ]);
 
   const [search, setSearch] = useState("");
+
+  const [filter, setFilter] = useState("All");
+
+  const [sort, setSort] = useState("Asc");
 
   const addTodo = (title, category) => {
     const newTodos = [...todos, {
@@ -59,21 +64,33 @@ function App() {
     <div className='app'>
       <h1>Lista de Tarefas</h1>
       <Search
-      search={search}
-      setSearch={setSearch}
+        search={search}
+        setSearch={setSearch}
+      />
+      <Filter
+        filter={filter}
+        setFilter={setFilter}
+        setSort={setSort}
       />
       <div className='todo-list'>
-        {todos.filter((todo) => 
+        {todos
+        .filter((todo) =>
+        filter === "All" ? true : filter === "Completed" ? todo.isCompleted : !todo.isCompleted
+        )
+        .filter((todo) =>
           todo.text.toLowerCase().includes(search.toLowerCase())
         )
+        .sort((a, b) => 
+          sort === "Asc" ? a.text.toLowerCase().localeCompare(b.text.toLowerCase()) : b.text.toLowerCase().localeCompare(a.text.toLowerCase())
+        )
         .map((todo) => (
-          <Todo 
-          key={todo.id}
-          todo={todo}
-          removeTodo={removeTodo}
-          completeTodo={completeTodo}
+          <Todo
+            key={todo.id}
+            todo={todo}
+            removeTodo={removeTodo}
+            completeTodo={completeTodo}
           />
-        ))}
+          ))}
       </div>
       <TodoForm
         addTodo={addTodo}
