@@ -1,14 +1,35 @@
-import React from 'react'
+import React from 'react';
 
-import './TodoForm.css'
+import { useState } from 'react';
 
-const TodoForm = () => {
+import './TodoForm.css';
+
+const TodoForm = ({addTodo}) => {
+    const [title, setTitle] = useState("");
+    const [category, setCategory] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if(!title || !category){
+            console.log("Valores inválidos!");
+            return;
+        }
+        addTodo(title, category);
+        setTitle("");
+        setCategory("");
+    }
+
     return (
         <div className='todo-form'>
             <h2>Criar Tarefa:</h2>
-            <form className='new-todo'>
-                <input type='text' placeholder='Digite o título' />
-                <select>
+            <form className='new-todo' onSubmit={handleSubmit}>
+                <input 
+                    type='text' 
+                    placeholder='Digite o título' 
+                    onChange={(e) => setTitle(e.target.value)}
+                    value={title}
+                />
+                <select value={category} onChange={(e) => setCategory(e.target.value)}>
                     <option value="">Selecione uma categoria</option>
                     <option value="Trabalho">Trabalho</option>
                     <option value="Pessoal">Pessoal</option>
@@ -21,4 +42,4 @@ const TodoForm = () => {
     )
 }
 
-export default TodoForm
+export default TodoForm;
