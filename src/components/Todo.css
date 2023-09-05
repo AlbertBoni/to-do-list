@@ -15,6 +15,15 @@
     align-items: center;
 }
 
+.todo-completed {
+    text-decoration: line-through;
+}
+
+.todo-completed .todo-button-complete {
+    background-color: #323eec;
+}
+
+
 .todo-button-complete {
     background-color: #5cb85c;
     color: #ffffff;
